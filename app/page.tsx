@@ -1,4 +1,20 @@
+"use client"
+import { useEffect, useState } from "react";
+import Loading from "./loading";
+
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(()=> {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <header className="bg-blue-100">
