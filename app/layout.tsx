@@ -1,25 +1,21 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import './globals.css';
+import { Space_Grotesk, Manrope, JetBrains_Mono } from 'next/font/google';
+import { Poppins } from 'next/font/google';
 
-export const metadata: Metadata = {
-  title: "Djenidi — Full Stack Developer",
-  description: "Portfolio of Djenidi, full stack developer. Building websites and web applications with React, Next.js and Node.js.",
-};
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-poppins',
+});
 
-export const viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
-};
+const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' });
+const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen antialiased">
+    <html lang="fr" className={`${poppins.variable} ${manrope.variable} ${jetbrains.variable}`}>
+      <body>
+        <div className="noise-grain" />
         {children}
       </body>
     </html>
