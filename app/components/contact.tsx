@@ -1,53 +1,102 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { CONTACTS } from "../data/contacts";
-import { SectionHeader } from "./section-header";
+import { useEffect, useRef } from "react";
+import { useSlideReveal } from "./use-slide-reveal";
+
+const CONTACT_LINKS = [
+  { label: "LinkedIn", idx: "01", url: "https://linkedin.com/in/djenidi-djaomananjara" },
+  { label: "Instagram", idx: "02", url: "https://instagram.com/djenidisimple" },
+  { label: "GitHub", idx: "03", url: "https://github.com/djenidisimple" },
+  { label: "Email", idx: "04", url: "mailto:djenidi@example.com" },
+];
+
+function MagneticLink({ link }: { link: (typeof CONTACT_LINKS)[number] }) {
+  const labelRef = useRef<HTMLSpanElement>(null);
+  const linkRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    const label = labelRef.current;
+    const el = linkRef.current;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!label || !el || reduceMotion) return;
+    label.style.transition = "transform .3s ease-out";
+
+    const onMove = (e: MouseEvent) => {
+      const r = el.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      label.style.transform = `translateX(${px * 14}px)`;
+    };
+
+    const onLeave = () => {
+      label.style.transform = "translateX(0)";
+    };
+
+    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+    return () => {
+      el.removeEventListener("mousemove", onMove);
+      el.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
+
+  return (
+    <a
+      ref={linkRef}
+      href={link.url}
+      target="_blank"
+      rel="noopener"
+      data-reveal="contact-link"
+      className="flex justify-between items-center py-[22px] px-1 border-b border-[rgba(245,246,255,0.18)] font-bold text-[clamp(18px,3vw,28px)] transition-[padding-left,color,opacity,transform] duration-[0.25s,0.25s,0.6s,0.6s] hover:pl-4 hover:text-accent max-md:text-[20px] max-md:py-[18px] max-md:px-0.5"
+    >
+      <span ref={labelRef} className="inline-block" style={{ willChange: "transform" }}>
+        {link.label}
+      </span>
+      <span className="font-mono text-[12px] opacity-60">{link.idx}</span>
+    </a>
+  );
+}
 
 export function Contact() {
+  const ref = useSlideReveal(["contact-head", "contact-link", "foot"]);
+
   return (
-    <section className="py-16 sm:py-20 pb-24 sm:pb-32">
-      <SectionHeader
-        label="Contact"
-        title="Interested in My Profile?"
-        description="Contact me or follow me on social media!"
+    <section
+      ref={ref}
+      id="contact"
+      className="relative bg-blue px-[5vw] pt-25 pb-15 rounded-[6px] overflow-hidden max-md:px-[6vw] max-md:pt-[72px] max-md:pb-10"
+    >
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(90deg, rgba(245,246,255,0.18) 0 1px, transparent 1px 12.5%)",
+        }}
       />
 
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 0.5 }}
-        className="flex flex-col gap-3 max-w-sm mx-auto px-4"
-      >
-        {CONTACTS.map((c) => (
-          <motion.a
-            key={c.label}
-            href={c.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ x: 4 }}
-            className="flex items-center justify-between px-4 py-3 rounded-lg border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/[0.15] transition-all duration-200 group"
-          >
-            <div className="flex items-center gap-3 text-gray-300">
-              <span
-                className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0"
-                dangerouslySetInnerHTML={{ __html: c.icon }}
-              />
-              <span className="text-xs sm:text-sm font-medium">{c.label}</span>
-            </div>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="w-3 h-3 sm:w-4 sm:h-4 text-[#22d3ee] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            >
-              <path d="M7 17L17 7M17 7H7M17 7v10" />
-            </svg>
-          </motion.a>
+      <div data-reveal="contact-head" className="relative mb-15">
+        <span className="font-mono text-[12px] tracking-[0.14em] uppercase opacity-75 mb-4 block">
+          Get In Touch
+        </span>
+        <h2 className="font-display text-[clamp(32px,7vw,84px)] leading-[1.02] tracking-[-0.01em] max-w-[820px]">
+          Interested in
+          <br />
+          my profile?
+        </h2>
+      </div>
+
+      <div className="relative border-t border-[rgba(245,246,255,0.18)]">
+        {CONTACT_LINKS.map((link) => (
+          <MagneticLink key={link.idx} link={link} />
         ))}
-      </motion.div>
+      </div>
+
+      <div
+        data-reveal="foot"
+        className="relative flex justify-between pt-10 font-mono text-[11px] tracking-[0.06em] opacity-70 flex-wrap gap-2.5"
+      >
+        <span>© 2026 Djaomananjara Djenidi</span>
+        <span>Built with HTML · CSS · JS</span>
+      </div>
     </section>
   );
 }

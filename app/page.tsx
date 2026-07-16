@@ -1,16 +1,16 @@
-import { About } from "./components/about";
-import { Contact } from "./components/contact";
-import { Experience } from "./components/experience";
 import { Hero } from "./components/hero";
+import { About } from "./components/about";
+import { Services } from "./components/services";
 import { Projects } from "./components/projects";
+import { Contact } from "./components/contact";
 
-export default function PortfolioPage() {
+export default function Home() {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#E9E9E9]">
-      {/* <Hero /> */}
-      {/* <About /> */}
-      {/* <Experience /> */}
-      {/* <Projects /> */}
+    <div className="p-3.5">
+      <Hero />
+      <About />
+      <Services />
+      <Projects />
       <Contact />
     </div>
   );

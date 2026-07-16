@@ -1,5 +1,36 @@
 @import "tailwindcss";
 
-html {
-  scroll-behavior: smooth;
+@theme {
+  --color-blue: #1e2bf0;
+  --color-blue-deep: #12189c;
+  --color-blue-dark: #0a0e5e;
+  --color-ink: #08091a;
+  --color-white: #f5f6ff;
+  --color-paper: #ffffff;
+  --color-accent: #6fd6ff;
+  --color-accent-2: #b6f000;
+
+  --font-display: var(--font-display), "Archivo Black", sans-serif;
+  --font-body: var(--font-body), "Space Grotesk", sans-serif;
+  --font-mono: var(--font-mono), "JetBrains Mono", monospace;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(6deg); }
+}
+
+@keyframes scrollLine {
+  0% { top: -40%; }
+  60% { top: 100%; }
+  100% { top: 100%; }
 }
