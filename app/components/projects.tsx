@@ -16,9 +16,9 @@ const PROJECTS = [
     num: "02",
     title: "Linked Brain — Plateforme d'Entraide Académique & Partage de Ressources",
     tagline: "Le portail académique connecté",
-    desc: "Portail éducatif complet facilitant l'accès aux ressources pédagogiques (annales du Baccalauréat) et la mise en relation d'étudiants. Architecture initialement MySQL, entièrement migrée vers PostgreSQL pour une scalabilité maximale et des requêtes plus fluides.",
+    desc: "Site d'éducation destiné au apprentissage scolaire",
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma ORM", "PostgreSQL / Supabase", "Geolocation API"],
-    url: "https://github.com/djenidisimple/linked-brain",
+    url: "https://linked-brain.com",
   },
   {
     num: "03",
