@@ -1,0 +1,64 @@
+# Djenidi Djaomananjara - Développeur Fullstack
+
+> Portfolio personnel de Djenidi Djaomananjara, développeur fullstack basé à Madagascar. Je conçois et développe des applications web complètes, de l'interface utilisateur jusqu'à la base de données.
+
+Site officiel : https://djenidisimple.vercel.app/
+Langue : français
+Contact : djenidigauss@gmail.com
+
+## Profil
+
+Djenidi Djaomananjara est un développeur fullstack basé à Madagascar. Il maîtrise le frontend avec React et Next.js, le backend avec ASP.NET Core, Spring Boot et Node.js, ainsi que la modélisation des données sur PostgreSQL. Son objectif est de créer des produits fiables, rapides et agréables à utiliser, du premier écran à la dernière requête.
+
+## Compétences
+
+- Frontend : Next.js (App Router), React, TypeScript
+- Backend : ASP.NET Core, Spring Boot, Node.js
+- Bases de données : PostgreSQL, MongoDB, Prisma
+- Desktop : Qt / C++
+- Services : interfaces web, APIs, modélisation et gestion de bases de données
+
+## Services
+
+- Frontend : des interfaces rapides, accessibles et soignées avec React, Next.js et TypeScript.
+- Backend : des APIs robustes et sécurisées avec ASP.NET Core, Spring Boot ou Node.js.
+- Base de données : une modélisation claire et des requêtes fiables avec PostgreSQL, MongoDB et Prisma.
+
+## Projets
+
+- G-Salles EMIT : application de planification et de réservation de salles pour l'EMIT.
+- linked-brain.com : plateforme éducative avec bibliothèque de PDF, contenus de leçons et système de quiz.
+- DevReview AI : revue de code et mentorat assistés par IA (FullStack Mentor).
+- EduManage : application de bureau Qt/C++ pour gérer les élèves, les classes, les paiements, les enseignants et l'administration.
+
+## Expériences
+
+- 2025 - 2026 : création de Rogo, une application web accessible en ligne.
+- 2024 - 2025 : création de linked-brain, plateforme éducative gratuite pour les lycéens malgaches. Elle couvre les mathématiques, la physique-chimie, la SVT, le français et l'histoire-géographie, avec des cours, des exercices et des quiz consultables sur téléphone sans inscription.
+
+## Certifications
+
+- Monétisation d'applications et services digitaux, Orange Digital Center Madagascar, formation du 5 au 8 mai 2026.
+- Responsive Web Design, freeCodeCamp, certification du 6 juillet 2026, environ 300 heures de travail.
+
+## Pages du site
+
+- [Accueil](https://djenidisimple.vercel.app/#top) : présentation de Djenidi Djaomananjara et accès aux projets.
+- [Projets](https://djenidisimple.vercel.app/#projets) : G-Salles EMIT, linked-brain.com, DevReview AI et EduManage.
+- [À propos](https://djenidisimple.vercel.app/#apropos) : profil, compétences et stack technique.
+- [Parcours](https://djenidisimple.vercel.app/#parcours) : expériences et certifications.
+- [Services](https://djenidisimple.vercel.app/#services) : frontend, backend et bases de données.
+- [Contact](https://djenidisimple.vercel.app/#contact) : email et réseaux sociaux.
+
+## Liens
+
+- [GitHub](https://github.com/djenidisimple) : code, projets et dépôts publics.
+- [LinkedIn](https://www.linkedin.com/in/djenidi-djaomananjara-55b5753a4/) : profil professionnel.
+- [Instagram](https://instagram.com/djenidisimple) : profil personnel.
+- [linked-brain.com](https://linked-brain.com/) : plateforme éducative.
+- [Certification freeCodeCamp Responsive Web Design](https://www.freecodecamp.org/certification/djenidisimple/responsive-web-design-v9).
+- [Attestation Orange Digital Center](https://drive.google.com/file/d/1VJYpdgegAgDhtazrVW4NHv1sX0iR64Ve/view?usp=sharing).
+
+## Optional
+
+- [Code source du portfolio](https://github.com/djenidisimple/portfolio) : application Next.js de ce site.
