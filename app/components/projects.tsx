@@ -1,134 +1,608 @@
-"use client";
+import { ArrowUpRight, SparkleIcon } from "./icons";
 
-import { useEffect, useRef } from "react";
-import { useSlideReveal } from "./use-slide-reveal";
+const windowShadow = "0 10px 30px -18px rgba(21,23,31,.3)";
 
-const PROJECTS = [
-  {
-    num: "01",
-    title: "DevReview AI — Plateforme Intelligente d'Évaluation de Code",
-    tagline: "L'évaluation automatisée par IA",
-    desc: "Application SaaS qui automatise la revue de code grâce à l'IA : analyse de la qualité, détection de vulnérabilités de sécurité et suggestions d'optimisation en temps réel, servies dans une interface fluide et moderne.",
-    stack: ["Next.js (App Router)", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL / Supabase", "AI API Integration"],
-    url: "https://github.com/djenidisimple/DevReview-AI",
-  },
-  {
-    num: "02",
-    title: "Linked Brain — Plateforme d'Entraide Académique & Partage de Ressources",
-    tagline: "Le portail académique connecté",
-    desc: "Site d'éducation destiné au apprentissage scolaire",
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma ORM", "PostgreSQL / Supabase", "Geolocation API"],
-    url: "https://linked-brain.com",
-  },
-  {
-    num: "03",
-    title: "PySurvival 2.5D — Moteur de Jeu Raycasting Inspiré de Doom",
-    tagline: "Le moteur de jeu rétro",
-    desc: "Moteur de jeu de survie en fausse 3D (2.5D) construit entièrement from scratch, sans moteur commercial, dans un labyrinthe à thème égyptien. Rendu par raycasting et gestion stricte de la mémoire pour tenir un 60 FPS constant malgré des contraintes matérielles limitées.",
-    stack: ["Python", "Pygame", "Raycasting", "Maths vectorielles", "Pixel Art"],
-    url: "https://github.com/djenidisimple/py-survival-2.5d",
-  },
-];
-
-function ProjectCard({ project, index }: { project: (typeof PROJECTS)[number]; index: number }) {
-  const cardRef = useRef<HTMLAnchorElement>(null);
-
-  useEffect(() => {
-    const card = cardRef.current;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!card || reduceMotion) return;
-
-    const onMove = (e: MouseEvent) => {
-      const r = card.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width - 0.5;
-      const py = (e.clientY - r.top) / r.height - 0.5;
-      card.style.transform = `perspective(600px) rotateX(${py * -6}deg) rotateY(${px * 6}deg) translateY(-2px)`;
-    };
-
-    const onLeave = () => {
-      card.style.transform = "perspective(600px) rotateX(0) rotateY(0) translateY(0)";
-    };
-
-    card.addEventListener("mousemove", onMove);
-    card.addEventListener("mouseleave", onLeave);
-    return () => {
-      card.removeEventListener("mousemove", onMove);
-      card.removeEventListener("mouseleave", onLeave);
-    };
-  }, []);
-
+function GSallesVisual() {
   return (
-    <a
-      ref={cardRef}
-      href={project.url}
-      target="_blank"
-      rel="noopener"
-      data-reveal="project-card"
-      className="group grid grid-cols-[70px_1fr] gap-x-7 gap-y-2 px-1 py-10 border-b border-[rgba(245,246,255,0.18)] transition-[opacity,transform,background] duration-[0.6s,0.4s,0.25s] hover:bg-[rgba(111,214,255,0.05)] max-md:grid-cols-1 max-md:gap-2.5 max-md:py-7.5"
-      style={{ transformStyle: "preserve-3d" }}
-    >
-      <span className="font-mono text-[13px] text-accent opacity-80 pt-1 max-md:pt-0">
-        {project.num}
-      </span>
-      <div className="min-w-0">
-        <div className="flex justify-between items-start gap-4 flex-wrap">
-          <span className="font-bold text-[clamp(20px,2.6vw,28px)] tracking-[-0.01em]">
-            {project.title}
+    <div className="vis" style={{ background: "#F2F4FB", padding: 28 }}>
+      <div
+        style={{
+          background: "#fff",
+          borderRadius: 8,
+          padding: 18,
+          height: "100%",
+          boxSizing: "border-box",
+          boxShadow: windowShadow,
+        }}
+      >
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "44px repeat(4, minmax(0, 1fr))",
+            gap: 7,
+            gridTemplateRows: "repeat(4, 1fr)",
+            height: "100%",
+          }}
+        >
+          <span />
+          <span className="mono" style={{ fontSize: 10, color: "var(--mut)" }}>
+            Lun
           </span>
-          <span className="font-mono text-lg text-accent shrink-0 transition-transform duration-250 group-hover:translate-x-1 group-hover:-translate-y-1 project-arrow">
-            ↗
+          <span className="mono" style={{ fontSize: 10, color: "var(--mut)" }}>
+            Mar
           </span>
-        </div>
-        <span className="block font-mono text-[11.5px] tracking-[0.06em] uppercase text-white/55 mt-1.5">
-          {project.tagline}
-        </span>
-        <p className="text-[14.5px] leading-[1.7] text-white/75 mt-4 max-w-[640px]">
-          {project.desc}
-        </p>
-        <div className="flex flex-wrap gap-2 mt-[18px]">
-          {project.stack.map((tech) => (
-            <span
-              key={tech}
-              className="font-mono text-[11px] tracking-[0.06em] px-3 py-[7px] border border-[rgba(245,246,255,0.18)] rounded-full uppercase"
-            >
-              {tech}
-            </span>
-          ))}
+          <span className="mono" style={{ fontSize: 10, color: "var(--mut)" }}>
+            Mer
+          </span>
+          <span className="mono" style={{ fontSize: 10, color: "var(--mut)" }}>
+            Jeu
+          </span>
+
+          <span
+            className="mono"
+            style={{ fontSize: 10, color: "var(--mut)", alignSelf: "center" }}
+          >
+            A
+          </span>
+          <div
+            style={{
+              gridColumn: "span 2",
+              background: "var(--tint3)",
+              borderRadius: 9,
+            }}
+          />
+          <div style={{ background: "var(--soft)", borderRadius: 9 }} />
+          <div style={{ background: "var(--soft)", borderRadius: 9 }} />
+
+          <span
+            className="mono"
+            style={{ fontSize: 10, color: "var(--mut)", alignSelf: "center" }}
+          >
+            B
+          </span>
+          <div style={{ background: "var(--soft)", borderRadius: 9 }} />
+          <div style={{ background: "var(--tint2)", borderRadius: 9 }} />
+          <div
+            style={{
+              gridColumn: "span 2",
+              background: "var(--tint3)",
+              borderRadius: 9,
+            }}
+          />
+
+          <span
+            className="mono"
+            style={{ fontSize: 10, color: "var(--mut)", alignSelf: "center" }}
+          >
+            C
+          </span>
+          <div style={{ background: "var(--tint2)", borderRadius: 9 }} />
+          <div style={{ background: "var(--soft)", borderRadius: 9 }} />
+          <div style={{ background: "var(--soft)", borderRadius: 9 }} />
+          <div style={{ background: "var(--tint3)", borderRadius: 9 }} />
         </div>
       </div>
-    </a>
+    </div>
   );
 }
 
-export function Projects() {
-  const ref = useSlideReveal(["work-head", "project-card"]);
-
+function LinkedBrainVisual() {
   return (
-    <section
-      ref={ref}
-      id="work"
-      className="relative bg-ink px-[5vw] py-[90px] rounded-[6px] overflow-hidden mb-3.5 max-md:px-[6vw] max-md:py-16"
+    <div
+      className="vis"
+      style={{
+        background: "#F5F3FB",
+        padding: 28,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
       <div
-        data-reveal="work-head"
-        className="flex justify-between items-end flex-wrap gap-4 mb-12 max-md:flex-col max-md:items-start"
+        style={{
+          background: "#fff",
+          borderRadius: 8,
+          padding: 22,
+          width: "100%",
+          maxWidth: 360,
+          boxSizing: "border-box",
+          boxShadow: windowShadow,
+          display: "flex",
+          flexDirection: "column",
+          gap: 12,
+        }}
       >
-        <div>
-          <span className="font-mono text-[12px] tracking-[0.14em] uppercase text-accent">
-            Selected Case Studies
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <span
+            className="mono"
+            style={{
+              fontSize: 11,
+              background: "var(--soft)",
+              padding: "4px 10px",
+              borderRadius: 8,
+              color: "var(--mut)",
+            }}
+          >
+            PDF
           </span>
-          <h2 className="font-display text-[clamp(30px,5vw,60px)] tracking-[-0.01em]">
-            My Work
-          </h2>
+          <div
+            style={{
+              width: 90,
+              height: 6,
+              borderRadius: 3,
+              background: "var(--soft)",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              style={{
+                width: "62%",
+                height: "100%",
+                background: "var(--accent)",
+              }}
+            />
+          </div>
         </div>
-        <span className="font-mono text-[12px] opacity-60">
-          03 / Featured Repositories
+        <div
+          style={{
+            height: 10,
+            width: "84%",
+            borderRadius: 5,
+            background: "var(--ink)",
+            margin: "4px 0 6px",
+          }}
+        />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            border: "1px solid var(--line)",
+            borderRadius: 12,
+            padding: "11px 14px",
+          }}
+        >
+          <span
+            style={{
+              width: 14,
+              height: 14,
+              borderRadius: "50%",
+              border: "2px solid #C9CDD9",
+            }}
+          />
+          <span
+            style={{
+              height: 7,
+              width: "55%",
+              borderRadius: 4,
+              background: "var(--soft)",
+            }}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            border: "1px solid var(--accent)",
+            background: "var(--tint)",
+            borderRadius: 12,
+            padding: "11px 14px",
+          }}
+        >
+          <span
+            style={{
+              width: 14,
+              height: 14,
+              borderRadius: "50%",
+              border: "4px solid var(--accent)",
+              boxSizing: "border-box",
+            }}
+          />
+          <span
+            style={{
+              height: 7,
+              width: "66%",
+              borderRadius: 4,
+              background: "var(--tint3)",
+            }}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            border: "1px solid var(--line)",
+            borderRadius: 12,
+            padding: "11px 14px",
+          }}
+        >
+          <span
+            style={{
+              width: 14,
+              height: 14,
+              borderRadius: "50%",
+              border: "2px solid #C9CDD9",
+            }}
+          />
+          <span
+            style={{
+              height: 7,
+              width: "42%",
+              borderRadius: 4,
+              background: "var(--soft)",
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DevReviewVisual() {
+  return (
+    <div
+      className="vis"
+      style={{
+        background: "#F1F7F5",
+        padding: 28,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        gap: 14,
+      }}
+    >
+      <div
+        className="mono code"
+        style={{
+          background: "#fff",
+          borderRadius: 8,
+          padding: "16px 0",
+          fontSize: 12,
+          lineHeight: 2,
+          boxShadow: windowShadow,
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+        }}
+      >
+        <div style={{ padding: "0 18px", color: "var(--mut)" }}>
+          {"12\u00a0\u00a0\u00a0const total = sum(items)"}
+        </div>
+        <div style={{ padding: "0 18px", background: "#FDF1EE" }}>
+          {"13\u00a0\u00a0-\u00a0return total / n"}
+        </div>
+        <div style={{ padding: "0 18px", background: "#E8F5EF" }}>
+          {"13\u00a0\u00a0+\u00a0return n ? total / n : 0"}
+        </div>
+      </div>
+      <div
+        style={{ display: "flex", gap: 12, alignItems: "flex-start" }}
+      >
+        <span
+          style={{
+            width: 32,
+            height: 32,
+            borderRadius: "50%",
+            background: "var(--accent)",
+            color: "#fff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flex: "none",
+          }}
+        >
+          <SparkleIcon />
         </span>
+        <div
+          style={{
+            background: "#fff",
+            borderRadius: "4px 14px 14px 14px",
+            padding: "11px 15px",
+            fontSize: 14,
+            lineHeight: 1.5,
+            boxShadow: windowShadow,
+          }}
+        >
+          Division par zéro possible si la liste est vide.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EduManageVisual() {
+  return (
+    <div className="vis" style={{ background: "#FAF4F0", padding: "28px 28px 0" }}>
+      <div
+        style={{
+          background: "#fff",
+          borderRadius: "8px 8px 0 0",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          boxShadow: windowShadow,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            gap: 6,
+            padding: "12px 16px",
+            borderBottom: "1px solid var(--line)",
+          }}
+        >
+          <span
+            style={{
+              width: 9,
+              height: 9,
+              borderRadius: "50%",
+              background: "#E3E5EC",
+            }}
+          />
+          <span
+            style={{
+              width: 9,
+              height: 9,
+              borderRadius: "50%",
+              background: "#E3E5EC",
+            }}
+          />
+          <span
+            style={{
+              width: 9,
+              height: 9,
+              borderRadius: "50%",
+              background: "#E3E5EC",
+            }}
+          />
+        </div>
+        <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
+          <div
+            className="vsb"
+            style={{
+              width: 96,
+              borderRight: "1px solid var(--line)",
+              padding: 14,
+              display: "flex",
+              flexDirection: "column",
+              gap: 10,
+              flex: "none",
+            }}
+          >
+            <div
+              style={{
+                height: 10,
+                borderRadius: 5,
+                background: "var(--tint3)",
+              }}
+            />
+            <div
+              style={{
+                height: 10,
+                width: "70%",
+                borderRadius: 5,
+                background: "var(--soft)",
+              }}
+            />
+            <div
+              style={{
+                height: 10,
+                width: "84%",
+                borderRadius: 5,
+                background: "var(--soft)",
+              }}
+            />
+          </div>
+          <div
+            style={{
+              flex: 1,
+              padding: "16px 18px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 14,
+              minWidth: 0,
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <span
+                style={{
+                  width: 26,
+                  height: 26,
+                  borderRadius: "50%",
+                  background: "var(--tint2)",
+                  flex: "none",
+                }}
+              />
+              <span
+                style={{
+                  height: 7,
+                  flex: 1,
+                  borderRadius: 4,
+                  background: "var(--soft)",
+                }}
+              />
+              <span
+                style={{
+                  fontSize: 11,
+                  fontWeight: 600,
+                  background: "#E8F5EF",
+                  color: "#1F6B4C",
+                  padding: "4px 10px",
+                  borderRadius: 999,
+                }}
+              >
+                Payé
+              </span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <span
+                style={{
+                  width: 26,
+                  height: 26,
+                  borderRadius: "50%",
+                  background: "var(--tint2)",
+                  flex: "none",
+                }}
+              />
+              <span
+                style={{
+                  height: 7,
+                  flex: 1,
+                  borderRadius: 4,
+                  background: "var(--soft)",
+                }}
+              />
+              <span
+                style={{
+                  fontSize: 11,
+                  fontWeight: 600,
+                  background: "#FDF1E4",
+                  color: "#8A4B0F",
+                  padding: "4px 10px",
+                  borderRadius: 999,
+                }}
+              >
+                En attente
+              </span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <span
+                style={{
+                  width: 26,
+                  height: 26,
+                  borderRadius: "50%",
+                  background: "var(--tint2)",
+                  flex: "none",
+                }}
+              />
+              <span
+                style={{
+                  height: 7,
+                  flex: 1,
+                  borderRadius: 4,
+                  background: "var(--soft)",
+                }}
+              />
+              <span
+                style={{
+                  fontSize: 11,
+                  fontWeight: 600,
+                  background: "#E8F5EF",
+                  color: "#1F6B4C",
+                  padding: "4px 10px",
+                  borderRadius: 999,
+                }}
+              >
+                Payé
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const PROJECTS = [
+  {
+    title: "G-Salles EMIT",
+    description:
+      "Application de planification et de réservation de salles pour l'EMIT.",
+    tags: ["Planning", "Réservation"],
+    href: "https://github.com/djenidisimple",
+    visual: <GSallesVisual />,
+  },
+  {
+    title: "linked-brain.com",
+    description:
+      "Plateforme éducative : bibliothèque de PDF, contenus de leçons et système de quiz.",
+    tags: ["Éducation", "Quiz"],
+    href: "https://linked-brain.com",
+    visual: <LinkedBrainVisual />,
+  },
+  {
+    title: "DevReview AI",
+    description:
+      "Revue de code et mentorat assistés par IA (FullStack Mentor).",
+    tags: ["IA", "Code review"],
+    href: "https://github.com/djenidisimple",
+    visual: <DevReviewVisual />,
+  },
+  {
+    title: "EduManage",
+    description:
+      "Application de bureau Qt/C++ : élèves, classes, paiements, enseignants et administration.",
+    tags: ["Qt / C++", "Desktop"],
+    href: "https://github.com/djenidisimple",
+    visual: <EduManageVisual />,
+  },
+];
+
+export function Projects() {
+  return (
+    <section
+      id="projets"
+      className="wrap"
+      style={{ paddingTop: 120, paddingBottom: 20 }}
+    >
+      <div style={{ maxWidth: 640, marginBottom: 56 }}>
+        <div className="eyebrow" style={{ marginBottom: 16 }}>
+          Projets
+        </div>
+        <h2 className="h2">Du concret, pensé pour les utilisateurs.</h2>
       </div>
 
-      <div className="flex flex-col border-t border-[rgba(245,246,255,0.18)]">
-        {PROJECTS.map((project, i) => (
-          <ProjectCard key={project.num} project={project} index={i} />
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 28 }}>
+        {PROJECTS.map((project) => (
+          <a
+            key={project.title}
+            className="card"
+            href={project.href}
+            style={{ flex: "1 1 460px", minWidth: 0 }}
+          >
+            {project.visual}
+            <div className="cbody">
+              <div>
+                <h3
+                  style={{
+                    margin: "0 0 8px",
+                    fontSize: 26,
+                    fontWeight: 700,
+                    letterSpacing: "-0.03em",
+                  }}
+                >
+                  {project.title}
+                </h3>
+                <p
+                  style={{
+                    margin: "0 0 18px",
+                    color: "var(--mut)",
+                    fontSize: 16,
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {project.description}
+                </p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="pill">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <span className="go">
+                <ArrowUpRight />
+              </span>
+            </div>
+          </a>
         ))}
       </div>
     </section>

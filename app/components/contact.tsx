@@ -1,101 +1,114 @@
-"use client";
+import { GithubIcon, InstagramIcon, LinkedinIcon, MailIcon } from "./icons";
 
-import { useEffect, useRef } from "react";
-import { useSlideReveal } from "./use-slide-reveal";
-
-const CONTACT_LINKS = [
-  { label: "LinkedIn", idx: "01", url: "https://linkedin.com/in/djenidi-djaomananjara" },
-  { label: "Instagram", idx: "02", url: "https://instagram.com/djenidisimple" },
-  { label: "GitHub", idx: "03", url: "https://github.com/djenidisimple" },
-  { label: "Email", idx: "04", url: "mailto:djenidi@example.com" },
+const SOCIAL_LINKS = [
+  {
+    label: "GitHub",
+    href: "https://github.com/djenidisimple",
+    icon: <GithubIcon />,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/djenidi-djaomananjara-55b5753a4/",
+    icon: <LinkedinIcon />,
+  },
+  {
+    label: "Instagram",
+    href: "https://instagram.com/djenidisimple",
+    icon: <InstagramIcon />,
+  },
 ];
 
-function MagneticLink({ link }: { link: (typeof CONTACT_LINKS)[number] }) {
-  const labelRef = useRef<HTMLSpanElement>(null);
-  const linkRef = useRef<HTMLAnchorElement>(null);
-
-  useEffect(() => {
-    const label = labelRef.current;
-    const el = linkRef.current;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!label || !el || reduceMotion) return;
-    label.style.transition = "transform .3s ease-out";
-
-    const onMove = (e: MouseEvent) => {
-      const r = el.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width - 0.5;
-      label.style.transform = `translateX(${px * 14}px)`;
-    };
-
-    const onLeave = () => {
-      label.style.transform = "translateX(0)";
-    };
-
-    el.addEventListener("mousemove", onMove);
-    el.addEventListener("mouseleave", onLeave);
-    return () => {
-      el.removeEventListener("mousemove", onMove);
-      el.removeEventListener("mouseleave", onLeave);
-    };
-  }, []);
-
-  return (
-    <a
-      ref={linkRef}
-      href={link.url}
-      target="_blank"
-      rel="noopener"
-      data-reveal="contact-link"
-      className="flex justify-between items-center py-[22px] px-1 border-b border-[rgba(245,246,255,0.18)] font-bold text-[clamp(18px,3vw,28px)] transition-[padding-left,color,opacity,transform] duration-[0.25s,0.25s,0.6s,0.6s] hover:pl-4 hover:text-accent max-md:text-[20px] max-md:py-[18px] max-md:px-0.5"
-    >
-      <span ref={labelRef} className="inline-block" style={{ willChange: "transform" }}>
-        {link.label}
-      </span>
-      <span className="font-mono text-[12px] opacity-60">{link.idx}</span>
-    </a>
-  );
-}
-
 export function Contact() {
-  const ref = useSlideReveal(["contact-head", "contact-link", "foot"]);
-
   return (
     <section
-      ref={ref}
       id="contact"
-      className="relative bg-blue px-[5vw] pt-25 pb-15 rounded-[6px] overflow-hidden max-md:px-[6vw] max-md:pt-[72px] max-md:pb-10"
+      className="wrap"
+      style={{ paddingTop: 130, paddingBottom: 40 }}
     >
       <div
-        className="absolute inset-0 pointer-events-none opacity-40"
+        className="box"
         style={{
-          backgroundImage:
-            "repeating-linear-gradient(90deg, rgba(245,246,255,0.18) 0 1px, transparent 1px 12.5%)",
+          position: "relative",
+          overflow: "hidden",
+          background: "var(--tint)",
+          border: "1px solid var(--line)",
+          borderRadius: 24,
+          padding: "96px 48px",
+          textAlign: "center",
         }}
-      />
-
-      <div data-reveal="contact-head" className="relative mb-15">
-        <span className="font-mono text-[12px] tracking-[0.14em] uppercase opacity-75 mb-4 block">
-          Get In Touch
-        </span>
-        <h2 className="font-display text-[clamp(32px,7vw,84px)] leading-[1.02] tracking-[-0.01em] max-w-[820px]">
-          Interested in
-          <br />
-          my profile?
-        </h2>
-      </div>
-
-      <div className="relative border-t border-[rgba(245,246,255,0.18)]">
-        {CONTACT_LINKS.map((link) => (
-          <MagneticLink key={link.idx} link={link} />
-        ))}
-      </div>
-
-      <div
-        data-reveal="foot"
-        className="relative flex justify-between pt-10 font-mono text-[11px] tracking-[0.06em] opacity-70 flex-wrap gap-2.5"
       >
-        <span>© 2026 Djaomananjara Djenidi</span>
-        <span>Built with HTML · CSS · JS</span>
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: -200,
+            width: 800,
+            height: 500,
+            marginLeft: -400,
+            background: "radial-gradient(closest-side, var(--tint2), transparent)",
+            pointerEvents: "none",
+          }}
+        />
+        <div style={{ position: "relative" }}>
+          <div className="eyebrow" style={{ marginBottom: 18 }}>
+            Contact
+          </div>
+          <h2
+            style={{
+              margin: "0 auto",
+              maxWidth: 720,
+              fontSize: "clamp(34px, 4.6vw, 62px)",
+              lineHeight: 1.06,
+              fontWeight: 800,
+              letterSpacing: "-0.04em",
+            }}
+          >
+            Un projet en tête ? Parlons-en.
+          </h2>
+          <p
+            style={{
+              margin: "22px auto 0",
+              maxWidth: 480,
+              fontSize: 18,
+              lineHeight: 1.6,
+              color: "var(--mut)",
+            }}
+          >
+            Décrivez-moi votre besoin, je reviens vers vous rapidement.
+          </p>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 16,
+              marginTop: 38,
+            }}
+          >
+            <a
+              className="btn btn-d"
+              href="mailto:djenidigauss@gmail.com"
+              style={{ height: 58, padding: "0 32px", fontSize: 17 }}
+            >
+              <MailIcon />
+              djenidigauss@gmail.com
+            </a>
+            <div style={{ display: "flex", gap: 12 }}>
+              {SOCIAL_LINKS.map((social) => (
+                <a
+                  key={social.label}
+                  className="soc"
+                  href={social.href}
+                  aria-label={social.label}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

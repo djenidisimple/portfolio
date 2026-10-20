@@ -1,96 +1,115 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const NAV_LINKS = [
-  { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Contact", href: "#contact" },
+  { label: "Projets", href: "#projets", id: "projets" },
+  { label: "À propos", href: "#apropos", id: "apropos" },
+  { label: "Parcours", href: "#parcours", id: "parcours" },
+  { label: "Services", href: "#services", id: "services" },
 ];
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const [lastY, setLastY] = useState(0);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY;
-      setHidden(y > lastY && y > 120);
-      setLastY(y);
+    document.documentElement.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.documentElement.style.overflow = "";
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastY]);
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+
+    const desktop = window.matchMedia("(min-width:901px)");
+    const onBreakpointChange = (event: MediaQueryListEvent) => {
+      if (event.matches) setMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    desktop.addEventListener("change", onBreakpointChange);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      desktop.removeEventListener("change", onBreakpointChange);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) return;
+
+    const ids = ["projets", "apropos", "parcours", "services", "contact"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+
+    ids.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[34px] py-[22px] font-mono text-[13px] tracking-[0.06em] mix-blend-difference text-white pointer-events-none transition-transform duration-[450ms] ease-in-out ${
-          hidden ? "-translate-y-full" : "translate-y-0"
-        } max-md:px-5 max-md:py-4`}
-      >
-        <a
-          href="#top"
-          className="w-[34px] h-[34px] border border-white border-[1.5px] rounded-full flex items-center justify-center font-display text-[12px] pointer-events-auto"
-        >
-          DJ
-        </a>
-
-        <div className="hidden md:flex gap-[26px]">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="relative opacity-85 hover:opacity-100 transition-opacity duration-200 pointer-events-auto
-                after:content-[''] after:absolute after:left-0 after:-bottom-[4px] after:w-0 after:h-px after:bg-current after:transition-all after:duration-[250ms] hover:after:w-full"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-
-        <button
-          className="md:hidden flex flex-col gap-[5px] w-[30px] bg-transparent border-none cursor-pointer pointer-events-auto p-1.5"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
-          aria-expanded={menuOpen}
-        >
-          <span
-            className={`block h-[1.5px] bg-white transition-all duration-300 ${
-              menuOpen ? "translate-y-[6.5px] rotate-45" : ""
-            }`}
-          />
-          <span
-            className={`block h-[1.5px] bg-white transition-all duration-300 ${
-              menuOpen ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block h-[1.5px] bg-white transition-all duration-300 ${
-              menuOpen ? "-translate-y-[6.5px] -rotate-45" : ""
-            }`}
-          />
-        </button>
-      </nav>
-
-      <div
-        className={`fixed inset-0 bg-blue z-45 flex flex-col items-start justify-center gap-[22px] px-[34px] transition-transform duration-500 ease-[cubic-bezier(.77,0,.18,1)] ${
-          menuOpen ? "translate-y-0 pointer-events-auto" : "-translate-y-full pointer-events-none"
-        }`}
-      >
-        {NAV_LINKS.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            onClick={() => setMenuOpen(false)}
-            className="font-display text-[clamp(30px,9vw,52px)] opacity-90 hover:opacity-100"
+      <header className="topbar">
+        <div className="wrap tb">
+          <a className="brand" href="#top" aria-label="Djenidi, accueil">
+            <img className="av" src="/src/avatar.jpg" alt="" width={38} height={38} />
+            <span>Djenidi</span>
+          </a>
+          <nav className="nav-links" aria-label="Navigation principale">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.id}
+                className="navlink"
+                href={link.href}
+                aria-current={activeSection === link.id ? "true" : undefined}
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <a className="tbcta" href="#contact">
+            Me contacter
+          </a>
+          <button
+            className="burger"
+            type="button"
+            aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mnav"
+            onClick={() => setMenuOpen((open) => !open)}
           >
+            <span />
+            <span />
+          </button>
+        </div>
+      </header>
+
+      <nav id="mnav" className="mnav" aria-label="Menu mobile" hidden={!menuOpen}>
+        {NAV_LINKS.map((link) => (
+          <a key={link.id} href={link.href} onClick={() => setMenuOpen(false)}>
             {link.label}
           </a>
         ))}
-      </div>
+        <a className="btn btn-d" href="#contact" onClick={() => setMenuOpen(false)}>
+          Me contacter
+        </a>
+      </nav>
     </>
   );
 }

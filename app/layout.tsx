@@ -1,42 +1,38 @@
 import type { Metadata } from "next";
-import { Archivo_Black, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "./components/navbar";
 
-const archivoBlack = Archivo_Black({
-  weight: "400",
+const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-display",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-body",
+  variable: "--font-manrope",
 });
 
 const jetBrainsMono = JetBrains_Mono({
+  weight: ["400", "500"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-mono",
+  variable: "--font-jetbrains",
 });
 
 export const metadata: Metadata = {
-  title: "Djenidi Djaomananjara — Fullstack Developer",
+  title: "Djenidi Djaomananjara — Développeur Fullstack",
   description:
-    "Portfolio de Djaomananjara Djenidi — Développeur Fullstack spécialisé React, Next.js, Node.js et TypeScript.",
+    "Portfolio de Djenidi Djaomananjara, développeur fullstack : des applications web complètes, de l'interface jusqu'à la base de données.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="fr"
-      className={`${archivoBlack.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable}`}
+      className={`${manrope.variable} ${jetBrainsMono.variable}`}
     >
-      <body className="bg-ink text-white font-body antialiased min-h-screen overflow-x-hidden">
-        <Navbar />
-        {children}
+      <body className="bg-white font-body text-ink antialiased min-h-screen">
+        <div className="root">
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   );
