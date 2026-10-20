@@ -2,7 +2,7 @@ import { ArrowUpRight } from "./icons";
 
 const EXPERIENCES = [
   {
-    period: "2025 – 2026",
+    period: "2025 - 2026",
     title: "Création de Rogo",
     description:
       "Conception et développement de Rogo, une application web accessible en ligne.",
@@ -10,7 +10,7 @@ const EXPERIENCES = [
     href: "http://200.141.3.80:3000/",
   },
   {
-    period: "2024 – 2025",
+    period: "2024 - 2025",
     title: "Création de linked-brain",
     description:
       "Création de la plateforme éducative de l'association Linked-Brain : cours, exercices et quiz gratuits, conformes au programme malgache, pour aider les lycéens à réviser en mathématiques, physique-chimie, SVT, français et histoire-géographie. Le site fonctionne sur téléphone et les cours se consultent sans inscription.",
@@ -33,7 +33,7 @@ const CERTIFICATES = [
     title: "Responsive Web Design",
     description:
       "Certification de développeur freeCodeCamp en conception de sites web adaptatifs, représentant environ 300 heures de travail.",
-    tags: ["freeCodeCamp", "6 juillet 2026", "≈ 300 h"],
+    tags: ["freeCodeCamp", "6 juillet 2026", "~ 300 h"],
     href: "https://www.freecodecamp.org/certification/djenidisimple/responsive-web-design-v9",
     image: "/src/certificat-responsive-web-design.jpg",
     alt: "Certification freeCodeCamp Responsive Web Design",

@@ -17,7 +17,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Djenidi Djaomananjara — Développeur Fullstack",
+  title: "Djenidi Djaomananjara - Développeur Fullstack",
   description:
     "Portfolio de Djenidi Djaomananjara, développeur fullstack : des applications web complètes, de l'interface jusqu'à la base de données.",
 };

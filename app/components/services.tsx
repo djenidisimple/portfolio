@@ -5,19 +5,19 @@ const SERVICES = [
     icon: <CodeIcon />,
     title: "Frontend",
     description: "Des interfaces rapides, accessibles et soignées.",
-    stack: "React · Next.js · TypeScript",
+    stack: "React / Next.js / TypeScript",
   },
   {
     icon: <ServerIcon />,
     title: "Backend",
     description: "Des APIs robustes et sécurisées.",
-    stack: "ASP.NET Core · Spring Boot · Node.js",
+    stack: "ASP.NET Core / Spring Boot / Node.js",
   },
   {
     icon: <DatabaseIcon />,
     title: "Base de données",
     description: "Une modélisation claire et des requêtes fiables.",
-    stack: "PostgreSQL · MongoDB · Prisma",
+    stack: "PostgreSQL / MongoDB / Prisma",
   },
 ];
 

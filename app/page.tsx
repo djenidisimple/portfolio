@@ -28,7 +28,7 @@ export default function Home() {
         }}
       >
         <span>2026 Djenidi Djaomananjara</span>
-        <span>Développeur Fullstack · Madagascar</span>
+        <span>Développeur Fullstack - Madagascar</span>
       </footer>
     </>
   );
